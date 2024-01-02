@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Jakarta',
       ),
-      home: MainScreen(),
+      home: const MainScreen(),
     );
   }
 }

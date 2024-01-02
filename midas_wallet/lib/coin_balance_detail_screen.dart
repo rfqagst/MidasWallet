@@ -17,73 +17,75 @@ class CoinBalanceDetailScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        actions: [FavCrypto()],
+        actions: const [FavCrypto()],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Image.asset(crypto.imageAsset),
-            const SizedBox(height: 15),
-            Text(
-              crypto.balance,
-              style:
-                  const TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "\$" + crypto.coinInUsd,
-              style: const TextStyle(fontSize: 15.0),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Column(
-                  children: [
-                    CircleAvatar(
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.arrow_upward),
-                      ),
-                    ),
-                    Text("Send")
-                  ],
-                ),
-                Column(
-                  children: [
-                    CircleAvatar(
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.arrow_downward),
-                      ),
-                    ),
-                    Text("Receive")
-                  ],
-                ),
-                Column(
-                  children: [
-                    CircleAvatar(
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.sync_alt),
-                      ),
-                    ),
-                    Text("Swap")
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 50),
-            const Text(
-              "Transactions",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold, // Align text to the left
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset(crypto.imageAsset),
+              const SizedBox(height: 15),
+              Text(
+                crypto.balance,
+                style: const TextStyle(
+                    fontSize: 25.0, fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
+              Text(
+                "\$${crypto.coinInUsd}",
+                style: const TextStyle(fontSize: 15.0),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Column(
+                    children: [
+                      CircleAvatar(
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.arrow_upward),
+                        ),
+                      ),
+                      const Text("Send")
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      CircleAvatar(
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.arrow_downward),
+                        ),
+                      ),
+                      const Text("Receive")
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      CircleAvatar(
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.sync_alt),
+                        ),
+                      ),
+                      const Text("Swap")
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 50),
+              const Text(
+                "Transactions",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold, // Align text to the left
+                ),
+              ),
+              const SizedBox(height: 10),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: crypto.transaction.length,
                 itemBuilder: (context, index) {
                   final String transaction = crypto.transaction[index];
@@ -94,7 +96,7 @@ class CoinBalanceDetailScreen extends StatelessWidget {
                       "Transfer",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text("To : 0x94280283"),
+                    subtitle: const Text("To : 0x94280283"),
                     trailing: Text(
                       transaction,
                       style: const TextStyle(color: Colors.red),
@@ -102,8 +104,8 @@ class CoinBalanceDetailScreen extends StatelessWidget {
                   );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

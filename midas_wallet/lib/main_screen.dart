@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {
@@ -6,75 +8,123 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text("Rifqi's Wallet"), Icon(Icons.notifications)],
-        ),
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        child: const Column(
-          children: <Widget>[
-            Text(
-              "Total Balance",
-            ),
-            Text(
-              "3,000 USD",
-              style: TextStyle(fontSize: 40.0),
-            ),
-            Text("24 change +4,3%"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Column(
-                  children: [Icon(Icons.send), Text("Send")],
-                ),
-                Column(
-                  children: [Icon(Icons.send), Text("Receive")],
-                ),
-                Column(
-                  children: [Icon(Icons.send), Text("Swap")],
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Balances"),
-                Row(
-                  children: [
-                    Icon(Icons.search),
-                    Icon(Icons.add),
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SafeArea(
+          child: Container(
+            alignment: Alignment.center,
+            child: Column(
               children: <Widget>[
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.money),
-                    Column(
-                      children: <Widget>[Text("Ethereum"), Text("20 Eth")],
+                    Text(
+                      "Rifqi's Wallet",
+                      style: TextStyle(fontFamily: 'Jakarta'),
                     ),
+                    Icon(Icons.notifications)
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Total Balance",
+                        style: TextStyle(fontSize: 17.0),
+                      ),
+                      Text(
+                        "3,000 USD",
+                        style: TextStyle(
+                            fontSize: 40.0,
+                            fontFamily: 'Jakarta',
+                            fontWeight: FontWeight.w800),
+                      ),
+                      Text(
+                        "24 change +4,3%",
+                        style: TextStyle(fontSize: 17.0),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Column(
+                        children: [Icon(Icons.arrow_upward), Text("Send")],
+                      ),
+                      Column(
+                        children: [Icon(Icons.arrow_downward), Text("Receive")],
+                      ),
+                      Column(
+                        children: [Icon(Icons.sync_alt), Text("Swap")],
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 20.0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Balances",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 17.0)),
+                      Row(
+                        children: [
+                          Icon(Icons.search),
+                          Icon(Icons.add),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      "45,349.42",
+                    Row(
+                      children: [
+                        Image.asset(
+                          'images/eth.png',
+                          width: 40.0,
+                          height: 40.0,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Ethereum",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "20 Eth",
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      "+1,30%",
-                    )
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text("45,349.42",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(
+                          "+1,30%",
+                        )
+                      ],
+                    ),
                   ],
-                ),
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );

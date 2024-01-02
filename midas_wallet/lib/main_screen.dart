@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:midas_wallet/coin_balance_detail_screen.dart';
+import 'package:midas_wallet/model/crypto_data.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -18,9 +20,16 @@ class MainScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Rifqi's Wallet",
-                      style: TextStyle(fontFamily: 'Jakarta'),
+                    Row(
+                      children: [
+                        Text(
+                          "Rifqi's Wallet",
+                          style: TextStyle(fontFamily: 'Jakarta'),
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.keyboard_arrow_down))
+                      ],
                     ),
                     Icon(Icons.notifications)
                   ],
@@ -34,15 +43,25 @@ class MainScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 17.0),
                       ),
                       Text(
-                        "3,000 USD",
+                        "\$3,000 USD",
                         style: TextStyle(
                             fontSize: 40.0,
                             fontFamily: 'Jakarta',
                             fontWeight: FontWeight.w800),
                       ),
-                      Text(
-                        "24 change +4,3%",
-                        style: TextStyle(fontSize: 17.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "24 change ",
+                            style: TextStyle(fontSize: 17.0),
+                          ),
+                          Text(
+                            "+2,04%",
+                            style:
+                                TextStyle(fontSize: 17.0, color: Colors.green),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -53,13 +72,37 @@ class MainScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Column(
-                        children: [Icon(Icons.arrow_upward), Text("Send")],
+                        children: [
+                          CircleAvatar(
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.arrow_upward),
+                            ),
+                          ),
+                          Text("Send")
+                        ],
                       ),
                       Column(
-                        children: [Icon(Icons.arrow_downward), Text("Receive")],
+                        children: [
+                          CircleAvatar(
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.arrow_downward),
+                            ),
+                          ),
+                          Text("Receive")
+                        ],
                       ),
                       Column(
-                        children: [Icon(Icons.sync_alt), Text("Swap")],
+                        children: [
+                          CircleAvatar(
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.sync_alt),
+                            ),
+                          ),
+                          Text("Swap")
+                        ],
                       ),
                     ],
                   ),
@@ -83,44 +126,73 @@ class MainScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      children: [
-                        Image.asset(
-                          'images/eth.png',
-                          width: 40.0,
-                          height: 40.0,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      final CryptoData crypto = cryptoList[index];
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return CoinBalanceDetailScreen(
+                              crypto: crypto,
+                            );
+                          }));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
-                                "Ethereum",
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    crypto.imageAsset,
+                                    width: 40.0,
+                                    height: 40.0,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          crypto.name,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18.0),
+                                        ),
+                                        Text(
+                                          crypto.balance,
+                                          style: TextStyle(fontSize: 15.0),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                "20 Eth",
-                              )
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(crypto.price,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0)),
+                                  Text(
+                                    crypto.priceChange,
+                                    style: TextStyle(
+                                        color: Colors.green, fontSize: 15.0),
+                                  )
+                                ],
+                              ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Text("45,349.42",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(
-                          "+1,30%",
-                        )
-                      ],
-                    ),
-                  ],
+                      );
+                    },
+                    itemCount: cryptoList.length,
+                  ),
                 )
               ],
             ),

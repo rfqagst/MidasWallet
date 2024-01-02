@@ -30,6 +30,6 @@ flutter:
          weight: 800
        - asset: fonts/PlusJakartaSansSemiBold.ttf
          weight: 600
-       - asset: fonts/PlusJakartaSansSemiItalic.ttf
+       - asset: fonts/PlusJakartaSansItalic.ttf
          style: italic
 

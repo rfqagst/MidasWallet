@@ -175,7 +175,7 @@ class MainScreen extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
-                                  Text(crypto.price,
+                                  Text("\$${crypto.price}",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18.0)),

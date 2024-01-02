@@ -17,6 +17,7 @@ class CoinBalanceDetailScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
+        actions: [FavCrypto()],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -105,6 +106,33 @@ class CoinBalanceDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class FavCrypto extends StatefulWidget {
+  const FavCrypto({Key? key}) : super(key: key);
+
+  @override
+  _FavCryptoState createState() => _FavCryptoState();
+}
+
+class _FavCryptoState extends State<FavCrypto> {
+  bool isFav = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          isFav = !isFav;
+        });
+      },
+      icon: Icon(
+        isFav ? Icons.star : Icons.star_border,
+        size: 35.0,
+      ),
+      color: Colors.amber,
     );
   }
 }
